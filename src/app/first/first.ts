@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Second } from "../second/second";
 
 @Component({
   selector: 'app-first',
-  imports: [FormsModule],
+  imports: [FormsModule, Second],
   templateUrl: './first.html',
 })
 export class First {
