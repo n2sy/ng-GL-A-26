@@ -1,3 +1,4 @@
-<li class="list-group-item">
-    Nidhal Jelassi
+<li (click)="sendCandidateToListe()" class="list-group-item">
+   <img [src]="oneCandidate.avatar"> {{ oneCandidate.prenom }} {{ oneCandidate.nom }}
+   <!-- <img src="{{oneCandidate.avatar}}"> {{ oneCandidate.prenom }} {{ oneCandidate.nom }} -->
 </li>
