@@ -5,7 +5,7 @@ import { Cv } from "./cv/cv";
 
 @Component({
   selector: 'app-root',
-  imports: [First, Second, Cv],
+  imports: [First, Second, Cv,],
   templateUrl: './app.html',
   styleUrl: './app.css',
   
