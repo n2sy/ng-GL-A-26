@@ -1,17 +1,18 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Candidat } from '../models/candidat';
+import { CustomDir } from '../custom-dir';
 
 @Component({
   selector: 'app-item',
-  imports: [],
+  imports: [CustomDir],
   templateUrl: './item.html',
   styleUrl: './item.css',
 })
 export class Item {
-  @Input() oneCandidate : Candidat;
+  @Input() oneCandidate: Candidat;
   @Output() eventToListe = new EventEmitter();
-  
+
   sendCandidateToListe() {
-    this.eventToListe.emit(this.oneCandidate)
+    this.eventToListe.emit(this.oneCandidate);
   }
 }
