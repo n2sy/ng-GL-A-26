@@ -4,13 +4,15 @@ import { Details } from "../details/details";
 import { Candidat } from '../models/candidat';
 import { First } from '../services/first';
 import { GestionCandidats } from '../services/gestion-candidats';
+import { Recrues } from '../recrues/recrues';
+import { GestionRecrues } from '../services/gestion-recrues';
 
 @Component({
   selector: 'app-cv',
-  imports: [Liste, Details],
+  imports: [Liste, Details, Recrues],
   templateUrl: './cv.html',
   styleUrl: './cv.css',
-  providers : []
+  providers : [First, GestionRecrues]
 })
 export class Cv {
     tabCandidats : Candidat[] = [

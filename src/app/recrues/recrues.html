@@ -1,0 +1,9 @@
+<div>
+  <h3>Liste des recrues</h3>
+  
+  <ol class="list-group">
+    @for (rec of tabRecrues; track $index) {
+        <app-item [oneCandidate]="rec"></app-item>
+    }
+  </ol>
+</div>
