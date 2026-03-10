@@ -11,9 +11,16 @@
     <tbody>
         @for (product of productSer.allProducts(); track $index) {
             <tr>
+                <td>{{ product.id }} </td>
                 <td>{{ product.name }} </td>
                 <td>{{ product.price }} </td>
-                <td>{{ product.isSelected }} </td>
+                @if(product.isSelected){
+                    <td><button (click)="productSer.updateSelectedProduct(product.id)" class="btn btn-success">Selected </button></td>
+                } 
+                @else {
+                    <td><button (click)="productSer.updateSelectedProduct(product.id)" class="btn btn-danger">Not Selected </button></td>
+                }
+                <td><button (click)="productSer.deleteProduct(product.id)" class="btn btn-outline-danger">Delete</button></td>
             </tr>
         }
     </tbody>

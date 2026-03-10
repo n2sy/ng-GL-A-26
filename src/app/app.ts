@@ -9,10 +9,12 @@ import { Recrues } from "./recrues/recrues";
 import { GestionRecrues } from './services/gestion-recrues';
 import { ExemplesSignal } from "./exemples-signal/exemples-signal";
 import { HomeProducts } from "./produts/home-products/home-products";
+import { RouterOutlet } from '@angular/router';
+import { Navbar } from "./navbar/navbar";
 
 @Component({
   selector: 'app-root',
-  imports: [First, Second, Cv, HomeAccounts, Direct, ManageServers, Recrues, ExemplesSignal, HomeProducts],
+  imports: [First, Second, Cv, HomeAccounts, Direct, ManageServers, Recrues, ExemplesSignal, HomeProducts, RouterOutlet, Navbar],
   templateUrl: './app.html',
   styleUrl: './app.css',
   providers : []

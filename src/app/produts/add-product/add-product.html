@@ -1,1 +1,11 @@
-<p>add-product works!</p>
+<table class="table">
+    <tr>
+        <td><input #name placeholder="Enter product name" type="text" class="form-control"></td>
+  
+        <td><input #price placeholder="Enter price" type="number" class="form-control"></td>
+   
+        <td><input #selected type="checkbox"></td>
+        
+        <td><button (click)="ajouterProduit(name.value, price.value, selected.checked)" class="btn btn-success">Save</button></td>
+    </tr>
+</table>
