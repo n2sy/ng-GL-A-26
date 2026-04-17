@@ -1,20 +1,19 @@
+<router-outlet></router-outlet>
+
 <div class="row">
-    <div class="col-5">
-        <app-liste (eventToCv)="recupererCandidat($event)"></app-liste>
-    </div>
-    <div class="col-7">
-        @if (selectedCandidate) {
-            <app-details [selCandidate]="selectedCandidate"></app-details>
-            
-        }
-        @else {
-            <p>Veuillez selectionner un candidat...</p>
-        }
-    </div>
+  <div class="col-5">
+    <app-liste (eventToCv)="recupererCandidat($event)"></app-liste>
+  </div>
+  <div class="col-7">
+    @if (selectedCandidate) {
+    <app-details [selCandidate]="selectedCandidate"></app-details>
+
+    } @else {
+    <p>Veuillez selectionner un candidat...</p>
+    }
+  </div>
 </div>
-  <app-recrues></app-recrues>
-
-
+<app-recrues></app-recrues>
 
 <!-- <button class="btn btn-primary" (click)="addHandler()">Add Candidate</button>
 <button class="btn btn-success" (click)="showListCandidate()">Cv-s View</button> -->

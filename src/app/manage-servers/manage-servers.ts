@@ -1,8 +1,9 @@
 import { DatePipe, NgClass, TitleCasePipe, UpperCasePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ShortPipe } from '../pipes/short-pipe';
 import { FormsModule } from '@angular/forms';
 import { FilterPipe } from '../pipes/filter-pipe';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-manage-servers',
@@ -11,7 +12,17 @@ import { FilterPipe } from '../pipes/filter-pipe';
   styleUrl: './manage-servers.css',
 })
 export class ManageServers {
-    selectedStatus : string = '';
+  private actRoute = inject(ActivatedRoute);
+  //http://localhost:4200/servers?section=gl&annee=2026
+  ngOnInit() {
+    this.actRoute.queryParamMap.subscribe({
+      next: (data) => {
+        console.log('Année', data.get('annee'));
+        console.log('Section', data.get('section'));
+      },
+    });
+  }
+  selectedStatus: string = '';
   allServers = [
     {
       name: 'Production Server',
@@ -38,14 +49,14 @@ export class ManageServers {
       status: 'stable',
     },
   ];
-  
+
   addServer() {
-    this.allServers.push( {
+    this.allServers.push({
       name: 'NEW SERVER',
       type: 'small',
       date_d: new Date(4, 5, 2023),
       status: 'stable',
-    },)
+    });
   }
 
   affecterClasse(serv) {

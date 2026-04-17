@@ -1,48 +1,45 @@
 import { Component, inject } from '@angular/core';
-import { Liste } from "../liste/liste";
-import { Details } from "../details/details";
+import { Liste } from '../liste/liste';
+import { Details } from '../details/details';
 import { Candidat } from '../models/candidat';
 import { First } from '../services/first';
 import { GestionCandidats } from '../services/gestion-candidats';
 import { Recrues } from '../recrues/recrues';
 import { GestionRecrues } from '../services/gestion-recrues';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-cv',
-  imports: [Liste, Details, Recrues],
+  imports: [Liste, Details, Recrues, RouterOutlet],
   templateUrl: './cv.html',
   styleUrl: './cv.css',
-  providers : [First, GestionRecrues]
+  providers: [First, GestionRecrues],
 })
 export class Cv {
-    tabCandidats : Candidat[] = [
-    
-    ];
-    selectedCandidate : Candidat;
-    
-    // Methode 1
-    // constructor(private firstSer : First) {
-    // }
+  tabCandidats: Candidat[] = [];
+  selectedCandidate: Candidat;
 
-    //Méthode 2
-    private firstSer = inject(First);
-    private candSer = inject(GestionCandidats);
-    
-    ngOnInit() {
-        this.firstSer.afficherBonjour();
-        this.tabCandidats = this.candSer.getAllCandidates();
-    }
-    recupererCandidat(cand) {
-        this.selectedCandidate = cand        
-    }
-    
-    addHandler() {
-        this.candSer.addCandidate();
-    }
-    
-     showListCandidate() {
-    console.log(this.candSer.getAllCandidates());
-    
+  // Methode 1
+  // constructor(private firstSer : First) {
+  // }
+
+  //Méthode 2
+  private firstSer = inject(First);
+  private candSer = inject(GestionCandidats);
+
+  ngOnInit() {
+    this.firstSer.afficherBonjour();
+    this.tabCandidats = this.candSer.getAllCandidates();
+  }
+  recupererCandidat(cand) {
+    this.selectedCandidate = cand;
   }
 
+  addHandler() {
+    this.candSer.addCandidate();
+  }
+
+  showListCandidate() {
+    console.log(this.candSer.getAllCandidates());
+  }
 }
