@@ -10,11 +10,10 @@ import { Item } from '../item/item';
   styleUrl: './recrues.css',
 })
 export class Recrues {
-    tabRecrues : Candidat[] = [];
-    private recrueSer = inject(GestionRecrues);
-    
-    ngOnInit() {
-       this.tabRecrues = this.recrueSer.allRecrues;
-    }
+  tabRecrues: Candidat[] = [];
+  private recrueSer = inject(GestionRecrues);
 
+  ngOnInit() {
+    this.tabRecrues = this.recrueSer.allRecrues;
+  }
 }
