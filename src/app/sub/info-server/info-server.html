@@ -1,1 +1,5 @@
-<p>info-server works!</p>
+<h6>{{ selectedServer.name }}</h6>
+<hr />
+<p>This server is {{ selectedServer.status }}</p>
+
+<button routerLink="edit" [disabled]="blockEdit" class="btn btn-info">Editer</button>

@@ -1,5 +1,18 @@
-<p>list-servers works!</p>
-
-<hr />
-
-<router-outlet></router-outlet>
+<div class="row">
+  <div class="col-4">
+    <ol class="list-group">
+      @for(server of serversSer.allServers; track $index) {
+      <li
+        [routerLink]="[server.id]"
+        [queryParams]="{allowEdit : server.id == 3 ? 1 : 0}"
+        class="list-group-item"
+      >
+        {{ server.name }}
+      </li>
+      }
+    </ol>
+  </div>
+  <div class="col-6">
+    <router-outlet></router-outlet>
+  </div>
+</div>
