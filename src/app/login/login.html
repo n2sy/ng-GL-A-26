@@ -1,0 +1,80 @@
+<form #f="ngForm" (ngSubmit)="submitHandler(f)">
+  <label for="log">Adresse Mail</label>
+  <input
+    #inpLogin="ngModel"
+    ngModel
+    required
+    email
+    name="login"
+    type="text"
+    class="form-control"
+    id="log"
+  />
+
+  @if(inpLogin.invalid && inpLogin.dirty) {
+
+  <div class="alert alert-danger">Veuillez saisir une adresse mail valide</div>
+  }
+
+  <label for="">Mot de passe</label>
+  <input ngModel required minlength="3" name="password" type="text" class="form-control" />
+
+  <div ngModelGroup="infos">
+    <label for="">Langage préféré</label>
+    <select name="langage" class="form-control" [ngModel]="defaultLangage">
+      <option value=""></option>
+      <option value="php">Php</option>
+      <option value="java">Java</option>
+      <option value="js">Javascript</option>
+    </select>
+    <hr />
+    <p>Default Language : {{ defaultLangage}}</p>
+    <hr />
+
+    <label for="">Commentaire</label>
+    <textarea
+      name="commentaire"
+      class="form-control"
+      [(ngModel)]="myComment"
+      col="5"
+      rows="4"
+    ></textarea>
+    <hr />
+    <p>MyComment : {{ myComment}}</p>
+    <hr />
+  </div>
+
+  <label for="">Gestion des erreurs</label>
+  <input
+    #inpError="ngModel"
+    required
+    minlength="6"
+    pattern="nidhal"
+    ngModel
+    name="erreurs"
+    type="text"
+    class="form-control"
+  />
+  @if(inpError.invalid) { @if(inpError.errors["required"]) {
+  <div class="alert alert-danger">Ce champ est obligatoire</div>
+
+  } @if(inpError.errors["minlength"]) {
+  <div class="alert alert-info">Le nbre minimal de caractrères est 6</div>
+
+  } @if(inpError.errors["pattern"]) {
+  <div class="alert alert-info">Le pattern est 'nidhal'</div>
+
+  } }
+
+  <button type="submit" class="btn btn-outline-primary">Se connecter</button>
+  <button (click)="generatePwd(f)" type="button" class="btn btn-outline-warning">
+    Generate Pwd
+  </button>
+  <button (click)="resetForm(f)" type="button" class="btn btn-outline-dark">Reset</button>
+  <button (click)="resetFormV2(f)" type="button" class="btn btn-outline-dark">Reset V2</button>
+
+  <pre>
+
+    {{ f.value | json }}
+  </pre>
+</form>
