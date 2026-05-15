@@ -4,6 +4,9 @@ import { Accueil } from './accueil/accueil';
 import { Add } from './add/add';
 import { Cv } from './cv/cv';
 import { Edit } from './edit/edit';
+import { allowLoginGuard } from './guards/allow-login-guard';
+import { quitterFormGuard } from './guards/quitter-form-guard';
+import { withTokenGuard } from './guards/with-token-guard';
 import { Infos } from './infos/infos';
 import { Login } from './login/login';
 import { ManageServers } from './manage-servers/manage-servers';
@@ -18,14 +21,19 @@ export const myRoutes: Routes = [
 
     children: [
       { path: '', component: Cv },
-      { path: 'add', component: Add },
+      {
+        path: 'add',
+        component: Add,
+        canActivate: [withTokenGuard],
+        canDeactivate: [quitterFormGuard],
+      },
       { path: ':id', component: Infos },
-      { path: ':id/edit', component: Edit },
+      { path: ':id/edit', component: Edit, canActivate: [withTokenGuard] },
     ],
   },
   { path: 'accounts', component: HomeAccounts },
   { path: 'manage-servers', component: ManageServers },
-  { path: 'login', component: Login },
+  { path: 'login', component: Login, canActivate: [allowLoginGuard] },
   { path: 'react', component: ReactForm },
   { path: 'products', component: HomeProducts },
   { path: 'servers', loadChildren: () => import('./sub/sub-module').then((m) => m.SubModule) },

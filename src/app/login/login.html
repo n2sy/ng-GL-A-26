@@ -1,11 +1,16 @@
-<form #f="ngForm" (ngSubmit)="submitHandler(f)">
+@if(showError()) {
+
+<div class="alert alert-danger">Login et/ou Mot de passe invalides</div>
+}
+
+<form #f="ngForm">
   <label for="log">Adresse Mail</label>
   <input
     #inpLogin="ngModel"
     ngModel
     required
     email
-    name="login"
+    name="email"
     type="text"
     class="form-control"
     id="log"
@@ -19,15 +24,15 @@
   <label for="">Mot de passe</label>
   <input ngModel required minlength="3" name="password" type="text" class="form-control" />
 
-  <div ngModelGroup="infos">
+  <!--<div ngModelGroup="infos">
     <label for="">Langage préféré</label>
     <select name="langage" class="form-control" [ngModel]="defaultLangage">
       <option value=""></option>
       <option value="php">Php</option>
       <option value="java">Java</option>
       <option value="js">Javascript</option>
-    </select>
-    <hr />
+    </select>-->
+  <!--<hr />
     <p>Default Language : {{ defaultLangage}}</p>
     <hr />
 
@@ -64,14 +69,21 @@
   } @if(inpError.errors["pattern"]) {
   <div class="alert alert-info">Le pattern est 'nidhal'</div>
 
-  } }
+  } }-->
+  @if(showRegister()) {
+  <button (click)="submitHandler(f)" class="btn btn-outline-warning">Register</button>
+  <button (click)="toggleButton()" class="btn btn-outline-dark">Switch To Login</button>
 
-  <button type="submit" class="btn btn-outline-primary">Se connecter</button>
-  <button (click)="generatePwd(f)" type="button" class="btn btn-outline-warning">
+  } @else {
+  <button (click)="submitHandler(f)" class="btn btn-outline-primary">Se connecter</button>
+  <button (click)="toggleButton()" class="btn btn-outline-danger">Switch to Register</button>
+
+  }
+  <!--<button (click)="generatePwd(f)" type="button" class="btn btn-outline-warning">
     Generate Pwd
   </button>
   <button (click)="resetForm(f)" type="button" class="btn btn-outline-dark">Reset</button>
-  <button (click)="resetFormV2(f)" type="button" class="btn btn-outline-dark">Reset V2</button>
+  <button (click)="resetFormV2(f)" type="button" class="btn btn-outline-dark">Reset V2</button>-->
 
   <pre>
 

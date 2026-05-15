@@ -1,5 +1,5 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { Item } from "../item/item";
+import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Item } from '../item/item';
 import { Candidat } from '../models/candidat';
 import { GestionCandidats } from '../services/gestion-candidats';
 
@@ -8,22 +8,30 @@ import { GestionCandidats } from '../services/gestion-candidats';
   imports: [Item],
   templateUrl: './liste.html',
   styleUrl: './liste.css',
-  providers : [GestionCandidats]
+  //providers : [GestionCandidats]
 })
 export class Liste {
-  allCandidates : Candidat[] = [];
+  allCandidates: Candidat[] = [];
   @Output() eventToCv = new EventEmitter();
   private candSer = inject(GestionCandidats);
-  
+
   ngOnInit() {
-    this.allCandidates = this.candSer.getAllCandidates();
+    this.candSer.getAllCandidatesAPI().subscribe({
+      next: (data: any) => {
+        console.log(data);
+        this.allCandidates = data;
+      },
+      error: (err) => {
+        alert('Connexion impossible...chargement de données ficitves');
+        this.allCandidates = this.candSer.getAllCandidates();
+      },
+    });
   }
   sendCandidateToCv(cand) {
-    this.eventToCv.emit(cand)
+    this.eventToCv.emit(cand);
   }
-  
-  showListCandidate() {
+
+  showListCandidate() {
     console.log(this.candSer.getAllCandidates());
-    
   }
 }

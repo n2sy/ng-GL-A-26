@@ -1,6 +1,8 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Auth } from '../services/auth';
 
 @Component({
   selector: 'app-login',
@@ -10,11 +12,39 @@ import { FormsModule, NgForm } from '@angular/forms';
 })
 export class Login {
   defaultLangage = 'js';
-
+  showRegister = signal<boolean>(true);
+  authSer = inject(Auth);
   myComment = 'Rien à signaler...';
+  router = inject(Router);
+  showError = signal<boolean>(false);
 
   submitHandler(f: NgForm) {
-    console.log(f);
+    if (this.showRegister()) {
+      this.authSer.inscription(f.value).subscribe({
+        next: (data) => {
+          alert('Inscription réussi');
+          this.showRegister.set(false);
+        },
+      });
+    } else {
+      this.authSer.seConnecter(f.value).subscribe({
+        next: (data: any) => {
+          alert(data.message);
+          localStorage.setItem('access_token', data.token);
+          this.router.navigateByUrl('/cv');
+        },
+        error: (err) => {
+          this.showError.set(true);
+          f.reset();
+        },
+      });
+    }
+  }
+
+  toggleButton() {
+    this.showRegister.update((previousValue) => {
+      return !previousValue;
+    });
   }
 
   generatePwd(f: NgForm) {
